@@ -1,0 +1,31 @@
+---
+kind: Game
+apiVersion: retro.sparkfabrik.com/v1
+metadata:
+  name: tetris
+  labels:
+    app: tetris
+spec:
+  name: "Tetris"
+  zipUrl: "https://dosgames.com/files/f-tetris.zip"
+  dir: "."
+  exe: "F-TETRIS.EXE"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: tetris-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: tetris
+  ports:
+  - name: port8080
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  - name: port8081
+    port: 8081
+    protocol: TCP
+    targetPort: 8081

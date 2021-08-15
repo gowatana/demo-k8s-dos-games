@@ -1,0 +1,31 @@
+---
+kind: Game
+apiVersion: retro.sparkfabrik.com/v1
+metadata:
+  name: ssf2t
+  labels:
+    app: ssf2t
+spec:
+  name: "SSF2T"
+  zipUrl: "https://dosgames.com/files/DOSBOX_SSF2T.ZIP"
+  dir: "."
+  exe: "SSF2T.BAT"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ssf2t-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: ssf2t
+  ports:
+  - name: port8080
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  - name: port8081
+    port: 8081
+    protocol: TCP
+    targetPort: 8081
